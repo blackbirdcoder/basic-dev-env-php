@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  php:
+    image: php:7.4-fpm
+    container_name: ${APP_NAME}_${CONTAINER_PHP}
+    volumes:
+      - './src:/var/www/html'
+
+  nginx:
+    image: nginx:latest
+    container_name: ${APP_NAME}_${CONTAINER_NGINX}
+    ports:
+      - ${NGINX_PORT}:80
+    volumes:
+      - './src:/var/www/html'
+      - './hosts:/etc/nginx/conf.d'
+      - './logs:/var/log/nginx'
+
+  mysql:
+    image: mysql:8
+    container_name: ${APP_NAME}_${CONTAINER_MYSQL}
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+
+
+
