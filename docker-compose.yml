@@ -2,10 +2,13 @@ version: '3'
 
 services:
   php:
-    image: php:7.4-fpm
+    build: ./images/php
+#    image: php:7.4-fpm
     container_name: ${APP_NAME}_${CONTAINER_PHP}
     volumes:
       - './src:/var/www/html'
+    networks:
+      - backend
 
   nginx:
     image: nginx:latest
@@ -16,12 +19,25 @@ services:
       - './src:/var/www/html'
       - './hosts:/etc/nginx/conf.d'
       - './logs:/var/log/nginx'
+    networks:
+      - backend
 
   mysql:
     image: mysql:8
     container_name: ${APP_NAME}_${CONTAINER_MYSQL}
+    ports:
+      - ${MYSQL_PORT}:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - './mysql:/var/lib/mysql'
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
 
 
 
