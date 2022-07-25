@@ -5,6 +5,8 @@ services:
     build: ./images/php
 #    image: php:7.4-fpm
     container_name: ${APP_NAME}_${CONTAINER_PHP}
+    env_file:
+      - .env
     volumes:
       - './src:/var/www/html'
     networks:
@@ -25,11 +27,14 @@ services:
   mysql:
     image: mysql:8
     container_name: ${APP_NAME}_${CONTAINER_MYSQL}
+    restart: always
     ports:
       - ${MYSQL_PORT}:3306
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - './mysql:/var/lib/mysql'
     networks:
