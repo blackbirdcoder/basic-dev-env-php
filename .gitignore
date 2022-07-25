@@ -2,4 +2,4 @@
 *.bak
 *.log
 .idea
-mysql/
+mysql
