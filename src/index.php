@@ -1,4 +1,5 @@
 <?php
+# performance check
 $host = getenv('APP_NAME') . '_' . getenv('CONTAINER_MYSQL');
 $user = getenv('MYSQL_USER');
 $pass = getenv('MYSQL_PASSWORD');
