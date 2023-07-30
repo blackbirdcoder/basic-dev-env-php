@@ -1,4 +1,4 @@
 #!/bin/bash
-cd docker
+cd "./docker/"
 mkdir mysql
 mkdir logos
