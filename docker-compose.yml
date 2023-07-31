@@ -19,7 +19,7 @@ services:
     volumes:
       - './src:/var/www/html'
       - './docker/hosts:/etc/nginx/conf.d'
-      - './docker/logos:/var/log/nginx'
+      - './docker/log:/var/log/nginx'
     networks:
       - backend
 
